@@ -23,7 +23,7 @@ router.post('/adduser', function(req, res, next) {
 	var password = req.body.password;
 	var email = req.body.email;
 
-	res.send(200);
+	res.sendStatus(200);
 
 });
 
@@ -31,7 +31,7 @@ router.post('/verify', function(req, res, next) {
 	var email = req.body.email;
 	var key = req.body.key;
 
-	res.end(200);
+	res.sendStatus(200);
 });
 
 router.post('/login', function(req, res, next) {
