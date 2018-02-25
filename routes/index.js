@@ -38,18 +38,33 @@ router.post('/verify', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
+	res.status(200).json({
+		status:'OK'
+	});
 });
 
 router.post('/logout', function(req, res, next) {
+	res.status(200).json({
+		status:'OK'
+	});
 });
 
 router.post('/listgames', function(req, res, next) {
+	res.status(200).json({
+		status:'OK'
+	});
 });
 
 router.post('/getgame', function(req, res, next) {
+	res.status(200).json({
+		status:'OK'
+	});
 });
 
 router.post('/getscore', function(req, res, next) {
+	res.status(200).json({
+		status:'OK'
+	});
 });
 
 module.exports = router;
