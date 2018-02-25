@@ -23,21 +23,15 @@ router.post('/adduser', function(req, res, next) {
 	var password = req.body.password;
 	var email = req.body.email;
 
-	res.status(200).json({
-		username: username,
-		password: password,
-		email: email
-	});
+	res.send(200);
+
 });
 
 router.post('/verify', function(req, res, next) {
 	var email = req.body.email;
 	var key = req.body.key;
 
-	res.status(200).json({
-		email: email,
-		key: key
-	});
+	res.end(200);
 });
 
 router.post('/login', function(req, res, next) {
