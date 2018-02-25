@@ -26,7 +26,7 @@ router.post('/adduser', function(req, res, next) {
 	res.status(200).json({
 		username: username,
 		password: password,
-		email: 'YOYOYOY'
+		email: email
 	});
 });
 
