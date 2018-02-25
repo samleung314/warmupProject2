@@ -24,7 +24,6 @@ router.post('/adduser', function(req, res, next) {
 	var email = req.body.email;
 
 	res.sendStatus(200);
-	res.end();
 });
 
 router.post('/verify', function(req, res, next) {
