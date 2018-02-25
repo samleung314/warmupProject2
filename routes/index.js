@@ -12,4 +12,25 @@ router.post('/ttt', function(req, res, next) {
 	res.render('index', {condition:false});
 });
 
+router.post('/adduser', function(req, res, next) {
+});
+
+router.post('/verify', function(req, res, next) {
+});
+
+router.post('/login', function(req, res, next) {
+});
+
+router.post('/logout', function(req, res, next) {
+});
+
+router.post('/listgames', function(req, res, next) {
+});
+
+router.post('/getgame', function(req, res, next) {
+});
+
+router.post('/getscore', function(req, res, next) {
+});
+
 module.exports = router;
