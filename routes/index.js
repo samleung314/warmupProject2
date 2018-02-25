@@ -31,6 +31,13 @@ router.post('/adduser', function(req, res, next) {
 });
 
 router.post('/verify', function(req, res, next) {
+	var email = req.body.email;
+	var key = req.body.key;
+
+	res.status(200).json({
+		email: email,
+		key: key
+	});
 });
 
 router.post('/login', function(req, res, next) {
