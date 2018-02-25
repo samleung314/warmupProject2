@@ -45,7 +45,7 @@ function onDivClick(index) {
 }
 
 function changeStateToGameOn() {
-  document.getElementById("state").textContent = "Game on!";
+  document.getElementById("state").textContent = "Game On!";
   gameOn = true;
 }
 

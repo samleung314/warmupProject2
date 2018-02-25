@@ -3,16 +3,31 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/ttt', function(req, res, next) {
-	res.render('index', {condition:true});
+	res.render('index', {login:true});
 });
 
 router.post('/ttt', function(req, res, next) {
+	res.status(200).json({
+		message: 'It works!'
+	});
+
 	var username = req.body.username;
-	console.log(req);
-	res.render('index', {condition:false});
+
+	console.log(username)
+	var login = !(username.length > 0);
+	res.render('index', {login});
 });
 
 router.post('/adduser', function(req, res, next) {
+	var username = req.body.username;
+	var password = req.body.password;
+	var email = req.body.email;
+
+	res.status(200).json({
+		username: username,
+		password: password,
+		email: 'YOYOYOY'
+	});
 });
 
 router.post('/verify', function(req, res, next) {
