@@ -22,3 +22,8 @@ app.use('/', routes);
 //app.use('/users', UserController); we gonna use the / path cause warmup2 dont wanna use "/users"
 
 module.exports = app;
+
+/*
+git add .; git commit -m "commit"; git push
+sudo rm -rf warmupProject2; sudo git clone https://github.com/samn334/warmupProject2
+*/

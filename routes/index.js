@@ -22,15 +22,14 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/adduser', function (req, res, next) {
-	console.log(req);
 	var username = req.body.username;
-	var email = req.body.email;
 	var password = req.body.password;
+	var email = req.body.email;
 
 	var newUser = new User({
-		name: username,
-		email: email,
-		password: password
+		username: username,
+		password: password,
+		email: email
 	});
 
 	newUser.save(function (err, newUser) {
@@ -47,8 +46,19 @@ router.post('/verify', function (req, res, next) {
 	var email = req.body.email;
 	var key = req.body.key;
 
-	res.status(200).json({
-		status: 'OK'
+	User.findOne({ email: email }, function (err, user) {
+		var backDoor = 'abracadabra';
+		if (err || !user) {
+			res.status(200).json({
+				status: 'ERROR'
+			});
+		}else {
+			if (email == user.email) {
+				res.status(200).json({
+					status: 'OK'
+				});
+			}
+		}
 	});
 });
 
@@ -83,8 +93,3 @@ router.post('/getscore', function (req, res, next) {
 });
 
 module.exports = router;
-
-/*
-git add .; git commit -m "commit"; git push
-sudo rm -rf warmupProject2; sudo git clone https://github.com/samn334/warmupProject2
-*/
