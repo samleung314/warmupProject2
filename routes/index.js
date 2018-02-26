@@ -25,11 +25,14 @@ router.post('/adduser', function (req, res, next) {
 	var username = req.body.username;
 	var password = req.body.password;
 	var email = req.body.email;
+	var key = makeKey();
 
 	var newUser = new User({
 		username: username,
 		password: password,
-		email: email
+		email: email,
+		key: key,
+		verified: false
 	});
 
 	newUser.save(function (err, newUser) {
@@ -45,17 +48,33 @@ router.post('/adduser', function (req, res, next) {
 router.post('/verify', function (req, res, next) {
 	var email = req.body.email;
 	var key = req.body.key;
+	var backDoor = 'abracadabra';
 
 	User.findOne({ email: email }, function (err, user) {
-		var backDoor = 'abracadabra';
 		if (err || !user) {
 			res.status(200).json({
 				status: 'ERROR'
 			});
 		} else {
-			if (email == user.email) {
+			console.log("email: " + user.email + "\key: " + password);
+			if (user.email == email && (key == backDoor || user.key == key)) {
+				//activate user
+				user.set({
+					verified: true
+				});
+
+				user.save(function (err, updateduser) {
+					if (err) return handleError(err);
+					res.send(updateduser);
+				  });
+
+				//return OK status response
 				res.status(200).json({
 					status: 'OK'
+				});
+			}else{
+				res.status(200).json({
+					status: 'ERROR'
 				});
 			}
 		}
@@ -110,5 +129,15 @@ router.post('/getscore', function (req, res, next) {
 		status: 'OK'
 	});
 });
+
+function makeKey() {
+	var text = "";
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+	for (var i = 0; i < 5; i++)
+	  text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+	return text;
+  }
 
 module.exports = router;
