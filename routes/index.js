@@ -52,7 +52,7 @@ router.post('/verify', function (req, res, next) {
 			res.status(200).json({
 				status: 'ERROR'
 			});
-		}else {
+		} else {
 			if (email == user.email) {
 				res.status(200).json({
 					status: 'OK'
@@ -63,8 +63,27 @@ router.post('/verify', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
-	res.status(200).json({
-		status: 'OK'
+	var email = req.body.email;
+	var password = req.body.password;
+	console.log("Email: " + email + "\nPass: " + password);
+
+	User.findOne({ email: email }, function (err, user) {
+		console.log("Email2: " + user.email + "\nPass2: " + user.password);
+		if (err || !user) {
+			res.status(200).json({
+				status: 'ERROR'
+			});
+		} else {
+			if ((email == user.email) && (password == user.password)) {
+				res.status(200).json({
+					status: 'OK'
+				});
+			} else {
+				res.status(200).json({
+					status: 'ERROR'
+				});
+			}
+		}
 	});
 });
 
