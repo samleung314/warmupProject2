@@ -63,18 +63,18 @@ router.post('/verify', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
-	var email = req.body.email;
+	var username = req.body.username;
 	var password = req.body.password;
-	console.log("Email: " + email + "\nPass: " + password);
+	console.log("username: " + username + "\nPass: " + password);
 
-	User.findOne({ email: email }, function (err, user) {
-		console.log("Email2: " + user.email + "\nPass2: " + user.password);
+	User.findOne({ username: username }, function (err, user) {
 		if (err || !user) {
 			res.status(200).json({
 				status: 'ERROR'
 			});
 		} else {
-			if ((email == user.email) && (password == user.password)) {
+			console.log("username2: " + user.username + "\nPass2: " + user.password);
+			if ((username == user.username) && (password == user.password)) {
 				res.status(200).json({
 					status: 'OK'
 				});
