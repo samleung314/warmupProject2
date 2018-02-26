@@ -9,7 +9,7 @@ router.use(bodyParser.json());
 var User = require('./User');
 
 // CREATES A NEW USER
-router.post('/', function (req, res) {
+router.post('/adduser', function (req, res) {
 
     User.create({
             name : req.body.name,
@@ -18,7 +18,10 @@ router.post('/', function (req, res) {
         }, 
         function (err, user) {
             if (err) return res.status(500).send("There was a problem adding the information to the database.");
-            res.status(200).send(user);
+            else {
+                console.log("USER POSTED!");
+                res.status(200).send(user);
+            }
         });
 
 });

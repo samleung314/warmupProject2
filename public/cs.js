@@ -61,35 +61,11 @@ function addUser(){
   user.email = document.getElementById('email').value;
 
   $jsonData = JSON.parse(JSON.stringify(user));
-
+  console.log($jsonData);
   $.ajax({
     type : 'POST',
-    url : './adduser/index.php',
-    data : {
-      'jsonData' : $jsonData
-    },
-    datatype : 'json',
-    success : function ($response){
-
-      console.log($response);
-
-    }, false : function(e) {
-      alert('failed');
-    }
-  });
-
-  var verify = new Object();
-  verify.email = "samson.leung@stonybrook.edu";
-  verify.key = "abracadabra";
-
-  $jsonData = JSON.parse(JSON.stringify(verify));
-  
-  $.ajax({
-    type : 'POST',
-    url : './verify/index.php',
-    data : {
-      'jsonData' : $jsonData
-    },
+    url : './adduser',
+    data : $jsonData,
     datatype : 'json',
     success : function ($response){
 
