@@ -84,7 +84,7 @@ router.post('/verify', function (req, res, next) {
 router.post('/login', function (req, res, next) {
 	var username = req.body.username;
 	var password = req.body.password;
-	console.log("username: " + username + "\nPass: " + password);
+	//console.log("username: " + username + "\nPass: " + password);
 
 	User.findOne({ username: username }, function (err, user) {
 		if (err || !user) {
@@ -92,8 +92,8 @@ router.post('/login', function (req, res, next) {
 				status: 'ERROR'
 			});
 		} else {
-			console.log("username2: " + user.username + "\nPass2: " + user.password);
-			if ((username == user.username) && (password == user.password)) {
+			//console.log("username2: " + user.username + "\nPass2: " + user.password);
+			if ((username == user.username) && (password == user.password) && user.verified) {
 				res.status(200).json({
 					status: 'OK'
 				});
