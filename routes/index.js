@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/* GET requests */
 router.get('/ttt', function(req, res, next) {
 	res.render('index', {login:true});
 });
 
+/* POST requests */
 router.post('/ttt', function(req, res, next) {
 	res.status(200).json({
 		message: 'It works!'
@@ -68,3 +69,8 @@ router.post('/getscore', function(req, res, next) {
 });
 
 module.exports = router;
+
+/*
+git add .; git commit -m "commit"; git push
+sudo rm -rf warmupProject2; sudo git clone https://github.com/samn334/warmupProject2
+*/
