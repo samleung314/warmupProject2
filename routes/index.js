@@ -49,29 +49,29 @@ router.post('/verify', function (req, res, next) {
 	var email = req.body.email;
 	var key = req.body.key;
 	var backDoor = 'abracadabra';
-
+	
+	//console.log("email: " + email + "\nkey: " + key);
 	User.findOne({ email: email }, function (err, user) {
 		if (err || !user) {
 			res.status(200).json({
 				status: 'ERROR'
 			});
 		} else {
-			console.log("email: " + user.email + "\key: " + password);
 			if (user.email == email && (key == backDoor || user.key == key)) {
 				//activate user
 				user.set({
 					verified: true
 				});
 
+				//update user on database
 				user.save(function (err, updateduser) {
 					if (err) return handleError(err);
-					res.send(updateduser);
+					//return OK status response
+					res.status(200).json({
+						status: 'OK'
+					});
 				  });
 
-				//return OK status response
-				res.status(200).json({
-					status: 'OK'
-				});
 			}else{
 				res.status(200).json({
 					status: 'ERROR'
