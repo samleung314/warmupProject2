@@ -10,13 +10,6 @@ router.get('/ttt', function (req, res, next) {
 // https://medium.freecodecamp.org/requiring-modules-in-node-js-everything-you-need-to-know-e7fbd119be8
 var User = require('../user/User');
 router.post('/ttt', function (req, res, next) {
-	res.status(200).json({
-		message: 'It works!'
-	});
-
-	var username = req.body.username;
-
-	console.log(username)
 	var login = !(username.length > 0);
 	res.render('index', { login });
 });

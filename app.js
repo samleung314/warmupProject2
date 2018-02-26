@@ -4,7 +4,6 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var UserController = require('./user/UserController');
 var db = require('./db');
 
 //create express app
