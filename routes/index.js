@@ -123,6 +123,7 @@ router.post('/getscore', function (req, res, next) {
 	});
 });
 
+/* Helper function to generate random key */
 function makeKey() {
 	var text = "";
 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -131,6 +132,6 @@ function makeKey() {
 	  text += possible.charAt(Math.floor(Math.random() * possible.length));
   
 	return text;
-  }
+}
 
 module.exports = router;
