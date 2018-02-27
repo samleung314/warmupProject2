@@ -105,9 +105,11 @@ router.post('/logout', function (req, res, next) {
 	});
 });
 
+//Received response (JSON): `{"status":"OK","games":[{"id":0,"start_date":"20180226"}]}`
 router.post('/listgames', function (req, res, next) {
 	res.status(200).json({
-		status: 'OK'
+		status: 'OK',
+		games: [{'id': 0, 'start_date': '20180226'}]
 	});
 });
 
@@ -119,7 +121,7 @@ router.post('/getgame', function (req, res, next) {
 
 router.post('/getscore', function (req, res, next) {
 	res.status(200).json({
-		status: 'OK'
+		status: 'OK'	
 	});
 });
 
