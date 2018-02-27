@@ -109,7 +109,7 @@ router.post('/logout', function (req, res, next) {
 router.post('/listgames', function (req, res, next) {
 	res.status(200).json({
 		status: 'OK',
-		games: [{'id': 0, 'start_date': '20180226'}]
+		games: []
 	});
 });
 
