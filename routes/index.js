@@ -105,6 +105,10 @@ router.post('/logout', function (req, res, next) {
 	});
 });
 
+router.post('/ttt/play', function (req, res, next) {
+	console.log('ttt/play ACCESSED!');
+});
+
 //Received response (JSON): `{"status":"OK","games":[{"id":0,"start_date":"20180226"}]}`
 router.post('/listgames', function (req, res, next) {
 	res.status(200).json({
