@@ -6,7 +6,7 @@ var UserSchema = new mongoose.Schema({
   password: String,
   key: String,
   verified: false,
-  games: [{id: Number, start_date: String}]
+  games: [{id: Number, start_date: String, grid: Array, winner: String}]
 });
 mongoose.model('User', UserSchema);
 

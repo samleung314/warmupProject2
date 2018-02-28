@@ -17,7 +17,11 @@ router.post('/ttt', function (req, res, next) {
 router.post('/ttt/play', function (req, res, next) {
 	console.log("PLAY!\n" + req);
 	var move = req.body.move;
-	var grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
+	var numGames = req.body.games.length;
+	var grid = req.body.games[numGames];
+
+	// initiate grid if it is null
+	if(grid == null) grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
 
 	// if move = null
 	if(!move){
@@ -28,6 +32,18 @@ router.post('/ttt/play', function (req, res, next) {
 		});
 	}else{
 		grid[move] = 'X';
+		user.set({
+			grid: grid
+		});
+
+		//update user on database
+		user.save(function (err, updateduser) {
+			if (err) return handleError(err);
+			//return OK status response
+			res.status(200).json({
+				status: 'OK'
+			});
+		  });
 	}
 });
 
