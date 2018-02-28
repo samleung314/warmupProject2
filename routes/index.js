@@ -122,12 +122,11 @@ router.post('/logout', function (req, res, next) {
 	});
 });
 
-
 //Received response (JSON): `{"status":"OK","games":[{"id":0,"start_date":"20180226"}]}`
 router.post('/listgames', function (req, res, next) {
 	res.status(200).json({
 		status: 'OK',
-		games: [{id: 9160, start_date: '20180226'}]
+		games: []
 	});
 });
 
