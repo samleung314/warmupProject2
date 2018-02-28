@@ -14,6 +14,22 @@ router.post('/ttt', function (req, res, next) {
 	res.render('index', { login });
 });
 
+router.post('/ttt/play', function (req, res, next) {
+	var move = req.body.move;
+	var grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
+
+	// if move = null
+	if(!move){
+		res.status(200).json({
+			status: 'OK',
+			grid: grid,
+			winner: ' '
+		});
+	}else{
+		console.log(typeof(move) + ' ' + move);
+	}
+});
+
 router.post('/adduser', function (req, res, next) {
 	var username = req.body.username;
 	var password = req.body.password;
@@ -105,9 +121,6 @@ router.post('/logout', function (req, res, next) {
 	});
 });
 
-router.post('/ttt/play', function (req, res, next) {
-	console.log('ttt/play ACCESSED!');
-});
 
 //Received response (JSON): `{"status":"OK","games":[{"id":0,"start_date":"20180226"}]}`
 router.post('/listgames', function (req, res, next) {
