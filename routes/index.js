@@ -15,7 +15,7 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/ttt/play', function (req, res, next) {
-	console.log("PLAY!\n" + req.body);
+	console.log("PLAY!\n" + req);
 	var move = req.body.move;
 	var grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
 
