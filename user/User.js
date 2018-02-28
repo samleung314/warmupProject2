@@ -5,7 +5,8 @@ var UserSchema = new mongoose.Schema({
   email: String,
   password: String,
   key: String,
-  verified: false 
+  verified: false,
+  games: [{id: Number, start_date: String}]
 });
 mongoose.model('User', UserSchema);
 
