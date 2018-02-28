@@ -23,13 +23,15 @@ router.post('/ttt/play', function (req, res, next) {
 	// initiate grid if it is null
 	if(grid == null) grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
 
-	// if move = null
+		// if move = null
 	if(!move){
 		res.status(200).json({
 			status: 'OK',
 			grid: grid,
 			winner: ' '
 		});
+	
+		//user makes a playing move at index "move"
 	}else{
 		grid[move] = 'X';
 		user.set({
@@ -41,7 +43,9 @@ router.post('/ttt/play', function (req, res, next) {
 			if (err) return handleError(err);
 			//return OK status response
 			res.status(200).json({
-				status: 'OK'
+				status: 'OK',
+				grid: grid,
+				winner: ' '
 			});
 		  });
 	}
