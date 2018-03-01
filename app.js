@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); //access static files in ‘public’ folder
-app.use(session({secret:'sessionTesting'
+app.use(session({secret:'sessionTesting', resave: false, saveUninitialized: false
 }));
 
 app.use('/', routes);
