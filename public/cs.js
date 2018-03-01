@@ -68,11 +68,14 @@ function addUser(){
     data : $jsonData,
     datatype : 'json',
     success : function ($response){
-
       console.log($response);
 
     }, false : function(e) {
       alert('failed');
     }
   });
+}
+
+function addUserForm(){
+  console.log("HEY!!");
 }

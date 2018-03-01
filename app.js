@@ -21,6 +21,7 @@ app.use(session({secret:'sessionTesting', resave: false, saveUninitialized: fals
 }));
 
 app.use('/', routes);
+app.use('/ttt', express.static('public'))
 //app.use('/users', UserController); we gonna use the / path cause warmup2 dont wanna use "/users"
 
 module.exports = app;

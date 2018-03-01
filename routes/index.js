@@ -4,6 +4,7 @@ var session = require('express-session');
 
 /* GET requests */
 router.get('/ttt', function (req, res, next) {
+	res.sendfile
 	res.render('index', { login: true });
 });
 
@@ -11,7 +12,8 @@ router.get('/ttt', function (req, res, next) {
 // https://medium.freecodecamp.org/requiring-modules-in-node-js-everything-you-need-to-know-e7fbd119be8
 var User = require('../user/User');
 router.post('/ttt', function (req, res, next) {
-	var login = !(username.length > 0);
+	if(!req.body.username) var login = true;
+	else login = false;
 	res.render('index', { login });
 });
 
@@ -53,6 +55,7 @@ router.post('/ttt/play', function (req, res, next) {
 });
 
 router.post('/adduser', function (req, res, next) {
+	console.log("Add User!");
 	var username = req.body.username;
 	var password = req.body.password;
 	var email = req.body.email;
@@ -128,10 +131,10 @@ router.post('/login', function (req, res, next) {
 				console.log(username + ' LOGIN!');
 				req.session.username = username;
 				res.write(req.session);
-				res.status(200).json({
+				res.write.json({
 					status: 'OK'
 				});
-
+				res.end();
 			} else {
 				res.status(200).json({
 					status: 'ERROR'
