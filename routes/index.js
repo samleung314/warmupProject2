@@ -21,7 +21,9 @@ router.post('/ttt', function (req, res, next) {
 router.post('/ttt/play', function (req, res, next) {
 	var user = currentUser._doc;
 	var move = req.body.move;
-	var game = user.games[user.games.length];
+	var games = user.games;
+	var game = games[games.length];
+	var grid = game.grid;
 
 	// initiate game if grid is null
 	if(grid == null){
@@ -39,8 +41,11 @@ router.post('/ttt/play', function (req, res, next) {
 		//user makes a playing move at index "move"
 	}else{
 		grid[move] = 'X';
-		user.set({
-			grid: grid
+		game.grid = grid;
+		games[games.length] = game;
+
+		currentUser.set({
+			games: games
 		});
 
 		//update user on database
