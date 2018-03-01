@@ -16,7 +16,7 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/ttt/play', function (req, res, next) {
-	console.log("PLAY!\n" + req.session);
+	console.log("PLAY!\n");
 	var move = req.body.move;
 	var numGames = req.body.games.length;
 	var grid = req.body.games[numGames];
@@ -126,6 +126,7 @@ router.post('/login', function (req, res, next) {
 		} else {
 			//console.log("username2: " + user.username + "\nPass2: " + user.password);
 			if ((username == user.username) && (password == user.password) && user.verified) {
+				console.log(username + 'LOGIN!');
 				res.status(200).json({
 					status: 'OK'
 				});
@@ -139,6 +140,7 @@ router.post('/login', function (req, res, next) {
 });
 
 router.post('/logout', function (req, res, next) {
+	console.log('LOGOUT!');
 	res.status(200).json({
 		status: 'OK'
 	});
