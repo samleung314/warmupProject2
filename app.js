@@ -2,6 +2,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var db = require('./db');
@@ -16,6 +17,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); //access static files in ‘public’ folder
+app.use(session({secret:'sessionTesting'
+}));
 
 app.use('/', routes);
 //app.use('/users', UserController); we gonna use the / path cause warmup2 dont wanna use "/users"
