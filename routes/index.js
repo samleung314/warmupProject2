@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var session = require('express-session');
+var currentUser;
 
 /* GET requests */
 router.get('/ttt', function (req, res, next) {
@@ -55,7 +56,6 @@ router.post('/ttt/play', function (req, res, next) {
 });
 
 router.post('/adduser', function (req, res, next) {
-	console.log("Add User!");
 	var username = req.body.username;
 	var password = req.body.password;
 	var email = req.body.email;
@@ -129,12 +129,12 @@ router.post('/login', function (req, res, next) {
 			//console.log("username2: " + user.username + "\nPass2: " + user.password);
 			if ((username == user.username) && (password == user.password) && user.verified) {
 				console.log(username + ' LOGIN!');
-				req.session.username = username;
-				res.write(req.session);
-				res.write.json({
+				//req.session.username = username;
+				currentUser = Object.assign({}, user);
+				res.json({
 					status: 'OK'
 				});
-				res.end();
+
 			} else {
 				res.status(200).json({
 					status: 'ERROR'
@@ -153,7 +153,7 @@ router.post('/logout', function (req, res, next) {
 
 //Received response (JSON): `{"status":"OK","games":[{"id":0,"start_date":"20180226"}]}`
 router.post('/listgames', function (req, res, next) {
-	console.log(req.session);
+	console.log(currentUser);
 	res.status(200).json({
 		status: 'OK',
 		games: []

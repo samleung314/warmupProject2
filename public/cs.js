@@ -77,5 +77,7 @@ function addUser(){
 }
 
 function addUserForm(){
-  console.log("HEY!!");
+  var form = document.getElementById('form1');
+  form.action = "/adduser";
+  form.submit();
 }
