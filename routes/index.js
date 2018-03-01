@@ -19,17 +19,18 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/ttt/play', function (req, res, next) {
-	var user = currentUser._doc;
+	var cookie = currentUser._doc;
+	User.findOne({ username: cookie.username }, function (err, user) {
+		console.log("FOUND " + user.username);
+	});
+	
 	var move = req.body.move;
 	var games = user.games;
 	var game = games[games.length];
-	var grid;
 
 	// initiate game if grid is null
-	if(game == null) grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
-	else grid = game.grid;
-
-		// if move = null
+		
+	// if move = null
 	if(!move){
 		res.status(200).json({
 			status: 'OK',
