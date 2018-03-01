@@ -127,10 +127,11 @@ router.post('/login', function (req, res, next) {
 			if ((username == user.username) && (password == user.password) && user.verified) {
 				console.log(username + ' LOGIN!');
 				req.session.username = username;
-				res.status(201).send(req.session);
+				res.write(req.session);
 				res.status(200).json({
 					status: 'OK'
 				});
+
 			} else {
 				res.status(200).json({
 					status: 'ERROR'
