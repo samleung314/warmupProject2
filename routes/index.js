@@ -113,7 +113,6 @@ router.post('/verify', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
-	console.log(req.session)
 	var username = req.body.username;
 	var password = req.body.password;
 	//console.log("username: " + username + "\nPass: " + password);
@@ -127,6 +126,8 @@ router.post('/login', function (req, res, next) {
 			//console.log("username2: " + user.username + "\nPass2: " + user.password);
 			if ((username == user.username) && (password == user.password) && user.verified) {
 				console.log(username + ' LOGIN!');
+				req.session.username = username;
+				res.status(201).send(req.session);
 				res.status(200).json({
 					status: 'OK'
 				});
@@ -148,6 +149,7 @@ router.post('/logout', function (req, res, next) {
 
 //Received response (JSON): `{"status":"OK","games":[{"id":0,"start_date":"20180226"}]}`
 router.post('/listgames', function (req, res, next) {
+	console.log(req.session);
 	res.status(200).json({
 		status: 'OK',
 		games: []
