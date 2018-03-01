@@ -22,7 +22,7 @@ router.post('/ttt/play', function (req, res, next) {
 	var cookie = currentUser._doc;
 	var move = req.body.move;
 
-	console.log("PLAY: " + cookie.username + ' MOVE:' + move);
+	console.log('PLAYER:' + cookie.username + ' MOVE:' + move);
 	// if move = null
 	if(move == null){
 		console.log("MOVE NULL");
@@ -33,12 +33,14 @@ router.post('/ttt/play', function (req, res, next) {
 		return;
 	}
 
-	User.findOne({ username: cookie.username }, function (err, user) {
-		console.log("FOUND: " + user.username);
-		var games = user.games;
+	User.findOne({username: cookie.username}, function (err, user) {
+		console.log('FOUND: ' + user.username);
 
-		//create new game
-		if(games[games.length] == null){
+		var firstGame = user.games.length == 0;
+
+		if(firstGame){
+			console.log('First Game!');
+
 			var id = 1;
 			var startDate = Math.floor(new Date() / 1000);
 			var grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
@@ -60,8 +62,7 @@ router.post('/ttt/play', function (req, res, next) {
 					grid: grid,
 					winner: winner
 				});
-			  });
-		}else{
+			});
 
 		}
 	});
@@ -113,6 +114,7 @@ router.post('/verify', function (req, res, next) {
 				user.save(function (err, updateduser) {
 					if (err) return handleError(err);
 					//return OK status response
+					console.log("Verified!");
 					res.status(200).json({
 						status: 'OK'
 					});
