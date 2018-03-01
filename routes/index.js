@@ -19,46 +19,48 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/ttt/play', function (req, res, next) {
+	console.log("PLAY");
 	var cookie = currentUser._doc;
-	User.findOne({ username: cookie.username }, function (err, user) {
-		console.log("FOUND " + user.username);
-	});
-	
 	var move = req.body.move;
-	var games = user.games;
-	var game = games[games.length];
 
-	// initiate game if grid is null
-		
+	console.log(cookie.username + '\nMOVE:' + move);
 	// if move = null
-	if(!move){
+	if(move == null){
+		console.log("MOVE NULL");
 		res.status(200).json({
 			status: 'OK',
-			grid: grid,
-			winner: ' '
+			grid: [' ',' ',' ',' ',' ',' ',' ',' ',' ']
 		});
-	
-		//user makes a playing move at index "move"
-	}else{
-		grid[move] = 'X';
-		game.grid = grid;
-		games[games.length] = game;
-
-		currentUser.set({
-			games: games
-		});
-
-		//update user on database
-		user.save(function (err, updateduser) {
-			if (err) return handleError(err);
-			//return OK status response
-			res.status(200).json({
-				status: 'OK',
-				grid: grid,
-				winner: ' '
-			});
-		  });
+		return;
 	}
+
+	User.findOne({ username: cookie.username }, function (err, user) {
+		console.log("FOUND: " + user.username);
+		var games = user.games;
+
+		//create new game
+		if(games[games.length] == null){
+			var id = 1;
+			var startDate = Math.floor(new Date() / 1000);
+			var grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
+			grid[move] = 'X';
+			var winner = ' ';
+
+			//add game to games array
+			user.games.push({id: id, start_date: startDate, grid: grid, winner: winner});
+
+			//update user on database
+			user.save(function (err, updateduser) {
+				if (err) return handleError(err);
+				//return OK status response
+				res.status(200).json({
+					status: 'OK'
+				});
+			  });
+		}else{
+
+		}
+	});
 });
 
 router.post('/adduser', function (req, res, next) {
