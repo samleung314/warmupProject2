@@ -19,7 +19,7 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/ttt/play', function (req, res, next) {
-	console.log('PLAY! User: ' + currentUser.username + '\n');
+	//console.log('PLAY! User: ' + currentUser.username + '\n');
 	var move = req.body.move;
 	var numGames = req.body.games.length;
 	var grid = req.body.games[numGames];
@@ -118,7 +118,6 @@ router.post('/verify', function (req, res, next) {
 router.post('/login', function (req, res, next) {
 	var username = req.body.username;
 	var password = req.body.password;
-	//console.log("username: " + username + "\nPass: " + password);
 
 	User.findOne({ username: username }, function (err, user) {
 		if (err || !user) {
@@ -126,9 +125,8 @@ router.post('/login', function (req, res, next) {
 				status: 'ERROR'
 			});
 		} else {
-			//console.log("username2: " + user.username + "\nPass2: " + user.password);
 			if ((username == user.username) && (password == user.password) && user.verified) {
-				console.log(username + ' LOGIN!');
+				console.log(user.username + ' LOGIN!');
 				//req.session.username = username;
 				currentUser = Object.assign({}, user);
 				res.json({
@@ -153,7 +151,7 @@ router.post('/logout', function (req, res, next) {
 
 //Received response (JSON): `{"status":"OK","games":[{"id":0,"start_date":"20180226"}]}`
 router.post('/listgames', function (req, res, next) {
-	console.log(currentUser);
+	console.log(currentUser._doc);
 	res.status(200).json({
 		status: 'OK',
 		games: []
