@@ -16,14 +16,13 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/ttt/play', function (req, res, next) {
-	console.log("PLAY!\n" + req);
-	console.log(req.body);
+	console.log("PLAY!\n" + req.session);
+	var move = req.body.move;
+	var numGames = req.body.games.length;
 	var grid = req.body.games[numGames];
 
 	// initiate game if grid is null
 	if(grid == null) grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
-	var move = req.body.move;
-	var numGames = req.body.games.length;
 
 		// if move = null
 	if(!move){
