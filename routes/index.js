@@ -26,7 +26,7 @@ router.post('/ttt/play', function (req, res, next) {
 	var grid;
 
 	// initiate game if grid is null
-	if(game.grid == null) grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
+	if(game == null) grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
 	else grid = game.grid;
 
 		// if move = null
