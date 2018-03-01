@@ -19,12 +19,14 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/ttt/play', function (req, res, next) {
-	//console.log('PLAY! User: ' + currentUser.username + '\n');
+	var user = currentUser._doc;
 	var move = req.body.move;
-	var grid = null;
+	var game = user.games[user.games.length];
 
 	// initiate game if grid is null
-	if(grid == null) grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
+	if(grid == null){
+		grid = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
+	}
 
 		// if move = null
 	if(!move){
@@ -150,7 +152,6 @@ router.post('/logout', function (req, res, next) {
 
 //Received response (JSON): `{"status":"OK","games":[{"id":0,"start_date":"20180226"}]}`
 router.post('/listgames', function (req, res, next) {
-	console.log(currentUser._doc);
 	res.status(200).json({
 		status: 'OK',
 		games: []
