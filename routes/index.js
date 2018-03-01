@@ -19,7 +19,7 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/ttt/play', function (req, res, next) {
-	console.log("PLAY!\n");
+	console.log('PLAY! User: ' + currentUser.username + '\n');
 	var move = req.body.move;
 	var numGames = req.body.games.length;
 	var grid = req.body.games[numGames];
