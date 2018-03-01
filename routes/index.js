@@ -113,7 +113,7 @@ router.post('/verify', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
-	console.log(req);
+	console.log(req.session)
 	var username = req.body.username;
 	var password = req.body.password;
 	//console.log("username: " + username + "\nPass: " + password);
@@ -126,7 +126,7 @@ router.post('/login', function (req, res, next) {
 		} else {
 			//console.log("username2: " + user.username + "\nPass2: " + user.password);
 			if ((username == user.username) && (password == user.password) && user.verified) {
-				console.log(username + 'LOGIN!');
+				console.log(username + ' LOGIN!');
 				res.status(200).json({
 					status: 'OK'
 				});
