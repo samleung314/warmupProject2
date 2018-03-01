@@ -19,11 +19,10 @@ router.post('/ttt', function (req, res, next) {
 });
 
 router.post('/ttt/play', function (req, res, next) {
-	console.log("PLAY");
 	var cookie = currentUser._doc;
 	var move = req.body.move;
 
-	console.log(cookie.username + '\nMOVE:' + move);
+	console.log("PLAY: " + cookie.username + ' MOVE:' + move);
 	// if move = null
 	if(move == null){
 		console.log("MOVE NULL");
@@ -52,9 +51,14 @@ router.post('/ttt/play', function (req, res, next) {
 			//update user on database
 			user.save(function (err, updateduser) {
 				if (err) return handleError(err);
-				//return OK status response
+
+				//update cookie
+				currentUser = Object.assign({}, updateduser);
+				//return status and grid
 				res.status(200).json({
-					status: 'OK'
+					status: 'OK',
+					grid: grid,
+					winner: winner
 				});
 			  });
 		}else{
@@ -135,7 +139,8 @@ router.post('/login', function (req, res, next) {
 		} else {
 			if ((username == user.username) && (password == user.password) && user.verified) {
 				console.log(user.username + ' LOGIN!');
-				//req.session.username = username;
+				
+				//add cookie
 				currentUser = Object.assign({}, user);
 				res.json({
 					status: 'OK'
@@ -161,7 +166,7 @@ router.post('/logout', function (req, res, next) {
 router.post('/listgames', function (req, res, next) {
 	res.status(200).json({
 		status: 'OK',
-		games: []
+		games: currentUser._doc.games
 	});
 });
 
