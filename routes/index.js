@@ -215,7 +215,7 @@ router.post('/getgame', function (req, res, next) {
 
 	User.findOne({'games.id': gameid}, function(err, game){
 		if(err)console.log(err)
-		if(the_user){
+		if(game){
 			console.log(game);
 		}
 	})
