@@ -214,8 +214,8 @@ router.post('/getgame', function (req, res, next) {
 
 	res.status(200).json({
 		status: 'OK',
-		grid: currentUser._doc.games[gameid].grid,
-		winner: currentUser._doc.games[gameid].winner
+		grid: currentUser._doc.games[gameid-1].grid,
+		winner: currentUser._doc.games[gameid-1].winner
 	});
 });
 
