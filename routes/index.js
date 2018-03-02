@@ -78,12 +78,12 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 					if (err) console.log(handleError(err));
 
 					//update cookie
-					cookie.grid = user.games[0].grid;
+					cookie.grid = grid;
 					cookie.winner = winner;
 
 					res.status(200).json({
 						status: 'OK',
-						grid: user.games[0].grid,
+						grid: grid,
 						winner: winner
 					});
 				}
