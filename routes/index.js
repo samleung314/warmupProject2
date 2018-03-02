@@ -213,19 +213,17 @@ router.post('/getgame', function (req, res, next) {
 	var gameid = req.body.id;
 	console.log('Game id: ' + gameid);
 
-	User.findOne({})
-		.populate('games', 'id grid winner')
-		.exec(
-			function (err, game) {
-				if (err) return console.error(err);
-
-				console.log(game);
-			});
+	User.findOne({'games.id': gameid}, function(err, game){
+		if(err)console.log(err)
+		if(the_user){
+			console.log(game);
+		}
+	})
 
 	res.status(200).json({
 		status: 'OK',
-		grid: currentUser._doc.games[gameid - 1].grid,
-		winner: currentUser._doc.games[gameid - 1].winner
+		// grid: currentUser._doc.games[gameid - 1].grid,
+		// winner: currentUser._doc.games[gameid - 1].winner
 	});
 });
 
