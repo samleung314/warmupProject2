@@ -40,13 +40,13 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 		var updateGame = true;
 
 		if (firstGame) {
-			console.log('First Game!');
-
 			var id = 1;
 			var startDate = Math.floor(new Date() / 1000);
 			var grid = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
 			grid[move] = 'X';
 			var winner = ' ';
+
+			console.log('First Game: ' + grid);
 
 			//add game to games array
 			user.games.push({ id: id, start_date: startDate, grid: grid, winner: winner });
@@ -65,10 +65,9 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 				});
 			});
 		} else if (updateGame) {
-			console.log("Update Game!");
-
 			var grid = user.games[0].grid;
 			grid[move] = 'X';
+			console.log("Update: " + grid);
 
 			var winner = checkWinner(grid);
 
