@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 var currentUser;
+var id = 0;
 
 /* GET requests */
 router.get('/ttt', function (req, res, next) {
@@ -38,7 +39,7 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 		var updateGame = true;
 
 		if (firstGame) {
-			var id = 1;
+			id +=1;
 			var startDate = Math.floor(new Date() / 1000);
 			var grid = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
 			grid[move] = 'X';
