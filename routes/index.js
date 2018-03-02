@@ -40,7 +40,7 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 		return addNewGame(cookie.username, move, res);
 	}
 
-	var playing = cookie.games[cookie.games.length].winner == ' ';
+	var playing = cookie.games[cookie.games.length-1].winner == ' ';
 	if (playing) {
 		var grid = cookie.games[id-1].grid;
 		if(grid[move] == 'X') return errorPlay(res);
