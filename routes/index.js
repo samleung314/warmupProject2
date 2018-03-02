@@ -30,20 +30,20 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 		console.log("MOVE NULL");
 		res.status(200).json({
 			status: 'OK',
-			grid: cookie.games[id-1].grid
+			grid: cookie.games[id - 1].grid
 		});
 		return;
 	}
 	var firstGame = cookie.games.length == 0;
 	if (firstGame || newGame) {
-		newGame = false; 
+		newGame = false;
 		return addNewGame(cookie.username, move, res);
 	}
 
-	var playing = cookie.games[cookie.games.length-1].winner == ' ';
+	var playing = cookie.games[cookie.games.length - 1].winner == ' ';
 	if (playing) {
-		var grid = cookie.games[cookie.games.length-1].grid;
-		if(grid[move] == 'X') return errorPlay(res);
+		var grid = cookie.games[cookie.games.length - 1].grid;
+		if (grid[move] == 'X') return errorPlay(res);
 		else grid[move] = 'X';
 
 		var winner = checkWinner(grid);
@@ -55,8 +55,8 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 				if (err) console.log(handleError(err));
 
 				//update cookie
-				cookie.games[cookie.games.length-1].grid = grid;
-				cookie.games[cookie.games.length-1].winner = winner;
+				cookie.games[cookie.games.length - 1].grid = grid;
+				cookie.games[cookie.games.length - 1].winner = winner;
 
 				console.log("Update: " + grid + "Winner: " + winner + '\n');
 				res.status(200).json({
@@ -97,7 +97,7 @@ function addNewGame(name, move, res) {
 	});
 }
 
-function errorPlay(res){
+function errorPlay(res) {
 	res.status(200).json({
 		status: 'ERROR'
 	});
@@ -213,10 +213,19 @@ router.post('/getgame', function (req, res, next) {
 	var gameid = req.body.id;
 	console.log('Game id: ' + gameid);
 
+	User.findOne({})
+		.populate('games', 'id grid winner')
+		.exec(
+			function (err, game) {
+				if (err) return console.error(err);
+
+				console.log(game);
+			});
+
 	res.status(200).json({
 		status: 'OK',
-		grid: currentUser._doc.games[gameid-1].grid,
-		winner: currentUser._doc.games[gameid-1].winner
+		grid: currentUser._doc.games[gameid - 1].grid,
+		winner: currentUser._doc.games[gameid - 1].winner
 	});
 });
 
