@@ -34,8 +34,6 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 	}
 
 	User.findOne({ username: cookie.username }, function makeMove(err, user) {
-		console.log('FOUND: ' + user.username);
-
 		var firstGame = user.games.length == 0;
 		var updateGame = true;
 
@@ -67,7 +65,6 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 		} else if (updateGame) {
 			var grid = user.games[0].grid;
 			grid[move] = 'X';
-			console.log("Update: " + grid);
 
 			var winner = checkWinner(grid);
 
@@ -81,6 +78,7 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 					cookie.grid = grid;
 					cookie.winner = winner;
 
+					console.log("Update: " + grid + "Winner: " + winner +'\n');
 					res.status(200).json({
 						status: 'OK',
 						grid: grid,
