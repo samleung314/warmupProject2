@@ -218,8 +218,8 @@ router.post('/getgame', function (req, res, next) {
 		if(game){
 			res.status(200).json({
 				status: 'OK',
-				grid: games[0].grid,
-				winner: games[0].winner,
+				grid: game[0].grid,
+				winner: game[0].winner,
 			});
 		}
 	})
