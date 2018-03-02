@@ -87,24 +87,6 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 					});
 				}
 			);
-
-
-			// //update grid array in game
-			// user.games[0].grid[move] = 'X';
-
-			// //update user on database
-			// user.save(function updateUser(err, updateduser) {
-			// 	if (err) return handleError(err);
-
-			// 	//update cookie
-			// 	currentUser = Object.assign({}, updateduser);
-			// 	//return status and grid
-			// 	res.status(200).json({
-			// 		status: 'OK',
-			// 		grid: user.games[0].grid,
-			// 		winner: user.games[0].winner
-			// 	});
-			// });
 		}
 	});
 });
