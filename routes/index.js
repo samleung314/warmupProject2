@@ -219,8 +219,8 @@ router.post('/getgame', function (req, res, next) {
 			console.log(game);
 			res.status(200).json({
 				status: 'OK',
-				grid: game[0].grid,
-				winner: game[0].winner,
+				grid: game.games[0].grid,
+				winner: game.games[0].winner,
 			});
 		}
 	})
