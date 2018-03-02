@@ -76,8 +76,8 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 					if (err) console.log(handleError(err));
 
 					//update cookie
-					cookie.grid = grid;
-					cookie.winner = winner;
+					cookie.games[0].grid = grid;
+					cookie.games[0].winner = winner;
 
 					console.log("Update: " + grid + "Winner: " + winner +'\n');
 					res.status(200).json({
