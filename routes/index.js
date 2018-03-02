@@ -58,8 +58,8 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 				cookie.games[id-1].grid = grid;
 				cookie.games[id-1].winner = winner;
 
-				console.log(cookie.username + "GRID: " + cookie.games[id-1].grid);
-				console.log(cookie.username + "winner: " + cookie.games[id-1].winner);
+				// console.log(cookie.username + "GRID: " + cookie.games[id-1].grid);
+				// console.log(cookie.username + "winner: " + cookie.games[id-1].winner);
 
 				console.log("Update: " + grid + "Winner: " + winner + '\n');
 				res.status(200).json({
@@ -215,13 +215,11 @@ router.post('/getgame', function (req, res, next) {
 	var cookie = currentUser._doc;
 	var gameid = req.body.id;
 	console.log('Game id: ' + gameid);
-	console.log(cookie.username + "GRID: " + cookie.games[id-1].grid);
-	console.log(cookie.username + "winner: " + cookie.games[id-1].winner + '\n');
 
 	res.status(200).json({
 		status: 'OK',
-		grid: cookie.games[gameid].grid,
-		winner: cookie.games[gameid].winner
+		grid: cookie.games[gameid-1].grid,
+		winner: cookie.games[gameid-1].winner
 	});
 });
 
