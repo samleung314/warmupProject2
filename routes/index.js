@@ -70,6 +70,8 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 			var grid = user.games[0].grid;
 			grid[move] = 'X';
 
+			var winner = checkWinner(grid);
+
 			User.update(
 				{'games.id': 1},
 				{ $set: {'games.$.grid': grid } },
@@ -79,7 +81,7 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 					res.status(200).json({
 						status: 'OK',
 						grid: user.games[0].grid,
-						winner: user.games[0].winner
+						winner: winner
 					});
 				}
 			);
@@ -263,6 +265,8 @@ function checkWinner(grid) {
 		(grid[2] == 'O' && grid[5] == 'O' && grid[8] == 'O')
 	) {
 		return 'O' //return O as winner
+	}else{
+		return ' ';
 	}
 }
 
