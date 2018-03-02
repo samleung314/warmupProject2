@@ -211,6 +211,7 @@ router.post('/listgames', function (req, res, next) {
 router.post('/getgame', function (req, res, next) {
 	var gameid = req.body.id;
 	console.log('Game id: ' + gameid);
+	console.log(cookie);
 
 	res.status(200).json({
 		status: 'OK',
