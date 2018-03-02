@@ -43,7 +43,8 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 	var playing = cookie.games[id-1].winner == ' ';
 	if (playing) {
 		var grid = cookie.games[id-1].grid;
-		grid[move] = 'X';
+		if(grid[move] == 'X') return errorPlay(res);
+		else grid[move] = 'X';
 
 		var winner = checkWinner(grid);
 
@@ -93,6 +94,12 @@ function addNewGame(name, move, res) {
 				winner: winner
 			});
 		});
+	});
+}
+
+function errorPlay(res){
+	res.status(200).json({
+		status: 'ERROR'
 	});
 }
 
