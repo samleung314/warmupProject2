@@ -42,7 +42,7 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 
 	var playing = cookie.games[cookie.games.length-1].winner == ' ';
 	if (playing) {
-		var grid = cookie.games[id-1].grid;
+		var grid = cookie.games[cookie.games.length-1].grid;
 		if(grid[move] == 'X') return errorPlay(res);
 		else grid[move] = 'X';
 
@@ -55,8 +55,8 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 				if (err) console.log(handleError(err));
 
 				//update cookie
-				cookie.games[id-1].grid = grid;
-				cookie.games[id-1].winner = winner;
+				cookie.games[cookie.games.length-1].grid = grid;
+				cookie.games[cookie.games.length-1].winner = winner;
 
 				console.log("Update: " + grid + "Winner: " + winner + '\n');
 				res.status(200).json({
