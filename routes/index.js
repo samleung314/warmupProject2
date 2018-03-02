@@ -49,7 +49,7 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 		var winner = checkWinner(grid);
 
 		User.update(
-			{ 'games.id': id },
+			{ 'username': cookie.username, 'games.id': id },
 			{ $set: { 'games.$.grid': grid, 'games.$.winner': winner } },
 			function updateGrid(err, result) {
 				if (err) console.log(handleError(err));
