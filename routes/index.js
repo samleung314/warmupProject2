@@ -216,15 +216,13 @@ router.post('/getgame', function (req, res, next) {
 	User.findOne({'games.id': gameid}, function(err, game){
 		if(err)console.log(err)
 		if(game){
-			console.log(game);
+			res.status(200).json({
+				status: 'OK',
+				grid: games[0].grid,
+				winner: games[0].winner,
+			});
 		}
 	})
-
-	res.status(200).json({
-		status: 'OK',
-		// grid: currentUser._doc.games[gameid - 1].grid,
-		// winner: currentUser._doc.games[gameid - 1].winner
-	});
 });
 
 router.post('/getscore', function (req, res, next) {
