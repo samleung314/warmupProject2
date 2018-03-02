@@ -167,6 +167,7 @@ router.post('/verify', function (req, res, next) {
 router.post('/login', function (req, res, next) {
 	var username = req.body.username;
 	var password = req.body.password;
+	id = 0; //reset cookie id
 
 	User.findOne({ username: username }, function (err, user) {
 		if (err || !user) {
