@@ -78,6 +78,10 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 				function updateGrid(err, result) {
 					if (err) console.log(handleError(err));
 
+					//update cookie
+					cookie.grid = user.games[0].grid;
+					cookie.winner = winner;
+
 					res.status(200).json({
 						status: 'OK',
 						grid: user.games[0].grid,
