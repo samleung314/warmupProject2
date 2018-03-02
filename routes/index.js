@@ -29,7 +29,7 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 		console.log("MOVE NULL");
 		res.status(200).json({
 			status: 'OK',
-			grid: cookie.game[0].grid
+			grid: cookie.games[0].grid
 		});
 		return;
 	}
