@@ -40,7 +40,7 @@ router.post('/ttt/play', function tttPost(req, res, next) {
 		return addNewGame(cookie.username, move, res);
 	}
 
-	var playing = cookie.games[id-1].winner == ' ';
+	var playing = cookie.games[cookies.games.length].winner == ' ';
 	if (playing) {
 		var grid = cookie.games[id-1].grid;
 		if(grid[move] == 'X') return errorPlay(res);
@@ -167,7 +167,7 @@ router.post('/verify', function (req, res, next) {
 router.post('/login', function (req, res, next) {
 	var username = req.body.username;
 	var password = req.body.password;
-	id = 0; //reset cookie id
+	//id = 0; //reset cookie id
 
 	User.findOne({ username: username }, function (err, user) {
 		if (err || !user) {
@@ -202,6 +202,7 @@ router.post('/logout', function (req, res, next) {
 
 //Received response (JSON): `{"status":"OK","games":[{"id":0,"start_date":"20180226"}]}`
 router.post('/listgames', function (req, res, next) {
+
 	res.status(200).json({
 		status: 'OK',
 		games: currentUser._doc.games
